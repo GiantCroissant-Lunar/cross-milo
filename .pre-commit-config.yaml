@@ -1,0 +1,81 @@
+# Pre-commit configuration for cross-milo project
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+repos:
+  # Basic file hygiene and common checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: |
+          (?x)^(
+            dotnet/.*/bin/.*|  # Exclude .NET build artifacts
+            dotnet/.*/obj/.*|  # Exclude .NET build artifacts
+            dotnet/.*\.(cs|vb|fs)|  # Let dotnet format handle .NET files
+            .*\.md  # Exclude markdown files (trailing spaces are intentional for line breaks)
+          )$
+      - id: end-of-file-fixer
+        exclude: ^(dotnet/.*/bin/.*|dotnet/.*/obj/.*)$
+      - id: check-json
+        exclude: ^(dotnet/.*/bin/.*|dotnet/.*/obj/.*)$
+      - id: check-xml
+        exclude: ^(dotnet/.*/bin/.*|dotnet/.*/obj/.*)$
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: mixed-line-ending
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+        exclude: ^(dotnet/.*/bin/.*|dotnet/.*/obj/.*)$
+      - id: check-executables-have-shebangs
+        exclude: \.(cmd|ps1|bat)$
+      - id: check-shebang-scripts-are-executable
+
+  # Secret detection (GitLeaks)
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.28.0
+    hooks:
+      - id: gitleaks
+
+  # Python linting and formatting (if cross-milo has Python scripts)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.13.2
+    hooks:
+      - id: ruff-check
+        args: [--fix, --exit-non-zero-on-fix]
+        files: ^scripts/.*\.py$
+      - id: ruff-format
+        files: ^scripts/.*\.py$
+
+  # YAML linting
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.37.1
+    hooks:
+      - id: yamllint
+        args: [-d, relaxed]
+        files: \.(yaml|yml)$
+
+  # Markdown linting (focused on structure, not line length)
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.45.0
+    hooks:
+      - id: markdownlint
+        args: ['--fix', '--disable', 'MD013']  # Disable line length rule
+
+  # .NET formatting and analysis
+  - repo: local
+    hooks:
+      - id: dotnet-format
+        name: dotnet format (whitespace + style)
+        entry: sh
+        args: ['-c', 'if command -v dotnet >/dev/null 2>&1; then cd dotnet/framework && if [ -f "CrossMilo.Contracts.sln" ]; then dotnet format CrossMilo.Contracts.sln --verbosity minimal || true; else echo "No solution found"; fi; else echo "dotnet CLI not found, skipping format"; fi']
+        language: system
+        files: ^dotnet/.*\.(cs|vb|fs)$
+        pass_filenames: false
+        require_serial: true
+
+# Configuration for specific tools
+default_stages: [pre-commit]
+fail_fast: false
+minimum_pre_commit_version: 3.0.0

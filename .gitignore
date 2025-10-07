@@ -1,0 +1,58 @@
+# .NET build artifacts
+**/bin/
+**/obj/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options
+.vs/
+.vscode/
+*.rsuser
+
+# Rider
+.idea/
+*.sln.iml
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+!packages/build/
+
+# Test results
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pre-commit
+.pre-commit-config.yaml.backup
