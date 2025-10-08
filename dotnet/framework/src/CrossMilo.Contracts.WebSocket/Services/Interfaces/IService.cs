@@ -1,4 +1,4 @@
-namespace WingedBean.Contracts.WebSocket;
+namespace Plate.CrossMilo.Contracts.WebSocket.Services;
 
 /// <summary>
 /// WebSocket service for real-time bidirectional communication.

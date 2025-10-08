@@ -1,6 +1,6 @@
 using Plate.PluginManoi.Contracts;
 
-namespace WingedBean.Contracts.WebSocket;
+namespace Plate.CrossMilo.Contracts.WebSocket.Services;
 
 /// <summary>
 /// Proxy service for IWebSocketService.

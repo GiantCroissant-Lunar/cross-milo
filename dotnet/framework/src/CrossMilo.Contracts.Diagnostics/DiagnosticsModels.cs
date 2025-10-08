@@ -1153,3 +1153,119 @@ public class DiagnosticsStatus
     /// </summary>
     public List<string> Messages { get; set; } = new();
 }
+
+/// <summary>
+/// Profiling session for tracking operation performance.
+/// </summary>
+public class ProfilingSession
+{
+    /// <summary>
+    /// Initializes a new instance of the ProfilingSession class.
+    /// </summary>
+    /// <param name="operationName">The operation name.</param>
+    public ProfilingSession(string operationName)
+    {
+        OperationName = operationName;
+    }
+
+    /// <summary>
+    /// Unique session identifier.
+    /// </summary>
+    public string SessionId { get; set; } = Guid.NewGuid().ToString();
+
+    /// <summary>
+    /// Operation being profiled.
+    /// </summary>
+    public string OperationName { get; set; }
+
+    /// <summary>
+    /// Session start time.
+    /// </summary>
+    public DateTimeOffset StartTime { get; set; } = DateTimeOffset.UtcNow;
+
+    /// <summary>
+    /// Session end time (null if still active).
+    /// </summary>
+    public DateTimeOffset? EndTime { get; set; }
+
+    /// <summary>
+    /// Profiling metrics collected during session.
+    /// </summary>
+    public Dictionary<string, object> Metrics { get; set; } = new();
+
+    /// <summary>
+    /// Additional session metadata.
+    /// </summary>
+    public Dictionary<string, object> Metadata { get; set; } = new();
+
+    /// <summary>
+    /// Converts the session to a ProfilingResult.
+    /// </summary>
+    /// <returns>The profiling result.</returns>
+    public ProfilingResult ToResult()
+    {
+        return new ProfilingResult
+        {
+            OperationName = OperationName,
+            TotalDuration = (EndTime ?? DateTimeOffset.UtcNow) - StartTime,
+            StartTime = StartTime,
+            EndTime = EndTime ?? DateTimeOffset.UtcNow
+        };
+    }
+}
+
+/// <summary>
+/// Health check registration information.
+/// </summary>
+public class HealthCheckRegistration
+{
+    /// <summary>
+    /// Unique health check identifier.
+    /// </summary>
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+
+    /// <summary>
+    /// Health check name.
+    /// </summary>
+    public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Health check function (async).
+    /// </summary>
+    public Func<Task<HealthCheckResult>>? Check { get; set; }
+
+    /// <summary>
+    /// Synchronous health check function.
+    /// </summary>
+    public Func<HealthCheckResult>? SyncCheck { get; set; }
+
+    /// <summary>
+    /// Whether this is an async check.
+    /// </summary>
+    public bool IsAsync { get; set; }
+
+    /// <summary>
+    /// Check interval.
+    /// </summary>
+    public TimeSpan Interval { get; set; } = TimeSpan.FromMinutes(1);
+
+    /// <summary>
+    /// Whether the check is enabled.
+    /// </summary>
+    public bool Enabled { get; set; } = true;
+
+    /// <summary>
+    /// Registration timestamp.
+    /// </summary>
+    public DateTimeOffset RegisteredAt { get; set; } = DateTimeOffset.UtcNow;
+
+    /// <summary>
+    /// Health check tags.
+    /// </summary>
+    public Dictionary<string, object> Tags { get; set; } = new();
+
+    /// <summary>
+    /// Additional registration metadata.
+    /// </summary>
+    public Dictionary<string, object> Metadata { get; set; } = new();
+}
