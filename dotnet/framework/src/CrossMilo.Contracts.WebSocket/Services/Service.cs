@@ -1,4 +1,4 @@
-using Plate.CrossMilo.Contracts.Core;
+using Plate.PluginManoi.Contracts;
 
 namespace WingedBean.Contracts.WebSocket;
 
