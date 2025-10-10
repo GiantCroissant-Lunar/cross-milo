@@ -50,6 +50,9 @@ __pycache__/
 dist/
 build/
 
+# NUKE
+.nuke/
+
 # OS
 .DS_Store
 Thumbs.db
