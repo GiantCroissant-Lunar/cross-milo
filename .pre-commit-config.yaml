@@ -63,9 +63,35 @@ repos:
       - id: markdownlint
         args: ['--fix', '--disable', 'MD013']  # Disable line length rule
 
-  # .NET formatting and analysis
+  # .NET validators from hook-validator
   - repo: local
     hooks:
+      # C# namespace validation
+      - id: check-namespace
+        name: Check C# Namespace Conventions
+        entry: python3 -m lunar_validators.dotnet.check_namespace
+        language: system
+        files: \.cs$
+        args: [--namespace-prefix=Plate.CrossMilo]
+        exclude: '(\.Designer\.cs|\.g\.cs|\.g\.i\.cs|/obj/|/bin/)'
+
+      # .csproj validation
+      - id: validate-csproj
+        name: Validate .csproj Files
+        entry: python3 -m lunar_validators.dotnet.validate_csproj
+        language: system
+        files: \.csproj$
+        exclude: '(/obj/|/bin/)'
+
+      # TODO format validation
+      - id: validate-todo-format
+        name: Validate TODO Format
+        entry: python3 -m lunar_validators.common.validate_todo
+        language: system
+        types: [text]
+        exclude: '(\.min\.|\.generated\.|/obj/|/bin/|/node_modules/)'
+
+      # .NET formatting
       - id: dotnet-format
         name: dotnet format (whitespace + style)
         entry: sh
