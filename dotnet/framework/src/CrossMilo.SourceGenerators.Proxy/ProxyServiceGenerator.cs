@@ -84,7 +84,7 @@ public class ProxyServiceGenerator : ISourceGenerator
         sb.AppendLine("using System.Collections.Generic;");
         sb.AppendLine("using System.Threading;");
         sb.AppendLine("using System.Threading.Tasks;");
-        sb.AppendLine("using Plate.PluginManoi.Contracts;");
+        sb.AppendLine("using Plate.CrossMilo.Contracts;");
         sb.AppendLine();
         sb.AppendLine($"namespace {namespaceName}");
         sb.AppendLine("{");
@@ -172,7 +172,7 @@ public class ProxyServiceGenerator : ISourceGenerator
         var serviceTypeDisplay = serviceType.ToDisplayString(new SymbolDisplayFormat(
             typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
         ));
-        sb.AppendLine($"            var service = _registry.Get<{serviceTypeDisplay}>(global::Plate.PluginManoi.Contracts.SelectionMode.{selectionMode});");
+        sb.AppendLine($"            var service = _registry.Get<{serviceTypeDisplay}>(global::Plate.CrossMilo.Contracts.SelectionMode.{selectionMode});");
 
         // Build method call arguments
         var arguments = string.Join(", ", method.Parameters.Select(p => p.Name));
@@ -209,7 +209,7 @@ public class ProxyServiceGenerator : ISourceGenerator
         {
             sb.AppendLine("            get");
             sb.AppendLine("            {");
-            sb.AppendLine($"                var service = _registry.Get<{serviceTypeDisplay}>(global::Plate.PluginManoi.Contracts.SelectionMode.{selectionMode});");
+            sb.AppendLine($"                var service = _registry.Get<{serviceTypeDisplay}>(global::Plate.CrossMilo.Contracts.SelectionMode.{selectionMode});");
             sb.AppendLine($"                return service.{propertyName};");
             sb.AppendLine("            }");
         }
@@ -218,7 +218,7 @@ public class ProxyServiceGenerator : ISourceGenerator
         {
             sb.AppendLine("            set");
             sb.AppendLine("            {");
-            sb.AppendLine($"                var service = _registry.Get<{serviceTypeDisplay}>(global::Plate.PluginManoi.Contracts.SelectionMode.{selectionMode});");
+            sb.AppendLine($"                var service = _registry.Get<{serviceTypeDisplay}>(global::Plate.CrossMilo.Contracts.SelectionMode.{selectionMode});");
             sb.AppendLine($"                service.{propertyName} = value;");
             sb.AppendLine("            }");
         }
@@ -243,12 +243,12 @@ public class ProxyServiceGenerator : ISourceGenerator
         sb.AppendLine("        {");
         sb.AppendLine("            add");
         sb.AppendLine("            {");
-        sb.AppendLine($"                var service = _registry.Get<{serviceTypeDisplay}>(global::Plate.PluginManoi.Contracts.SelectionMode.{selectionMode});");
+        sb.AppendLine($"                var service = _registry.Get<{serviceTypeDisplay}>(global::Plate.CrossMilo.Contracts.SelectionMode.{selectionMode});");
         sb.AppendLine($"                service.{eventName} += value;");
         sb.AppendLine("            }");
         sb.AppendLine("            remove");
         sb.AppendLine("            {");
-        sb.AppendLine($"                var service = _registry.Get<{serviceTypeDisplay}>(global::Plate.PluginManoi.Contracts.SelectionMode.{selectionMode});");
+        sb.AppendLine($"                var service = _registry.Get<{serviceTypeDisplay}>(global::Plate.CrossMilo.Contracts.SelectionMode.{selectionMode});");
         sb.AppendLine($"                service.{eventName} -= value;");
         sb.AppendLine("            }");
         sb.AppendLine("        }");

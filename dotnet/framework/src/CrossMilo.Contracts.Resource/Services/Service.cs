@@ -1,4 +1,4 @@
-using Plate.PluginManoi.Contracts;
+using Plate.CrossMilo.Contracts;
 
 namespace Plate.CrossMilo.Contracts.Resource.Services;
 
