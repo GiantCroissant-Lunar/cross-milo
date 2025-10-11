@@ -1,0 +1,56 @@
+# Plate Validators Configuration for CrossMilo
+
+dotnet:
+  # Layer and company naming
+  layer_name: "Plate"
+  company_prefix: "GiantCroissant"
+  project_name: "CrossMilo"
+
+  # Namespace configuration
+  skip_intermediate_dirs: false
+
+  # Dependency rules - PluginManoi can reference CrossMilo, but not vice versa
+  dependency_rules:
+    "Plate.CrossMilo":
+      can_reference: []
+      cannot_reference:
+        - "Plate.PluginManoi"  # CrossMilo CANNOT reference PluginManoi (would be circular)
+
+    "Plate.PluginManoi":
+      can_reference:
+        - "Plate.CrossMilo"  # PluginManoi can reference CrossMilo (higher-level)
+
+  # Blacklist - forbidden namespace patterns
+  blacklist:
+    - "WingedBean"  # Old namespace, should be migrated to Plate
+
+  # Whitelist - allowed namespace patterns (overrides blacklist)
+  whitelist:
+    - "Plate"
+    - "Newtonsoft"
+    - "Serilog"
+    - "Polly"
+    - "Microsoft.Extensions"
+
+  # Package ID validation
+  enforce_package_id_convention: true
+  packable_only: true
+
+  # .csproj validation
+  required_properties:
+    - "TargetFramework"
+    - "Nullable"
+
+  allow_cpm: true  # Allow Central Package Management
+
+common:
+  # TODO format validation
+  todo_format: "TODO(author): description"
+
+  # Exclude patterns
+  exclude_patterns:
+    - "*.Designer.cs"
+    - "*.g.cs"
+    - "*.g.i.cs"
+    - "**/obj/**"
+    - "**/bin/**"
