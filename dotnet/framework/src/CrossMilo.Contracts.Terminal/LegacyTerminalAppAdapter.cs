@@ -40,6 +40,8 @@ public class LegacyTerminalAppAdapter : IHostedService
     public async Task StopAsync(CancellationToken cancellationToken)
     {
         if (_terminalApp != null)
+        {
             await _terminalApp.StopAsync(cancellationToken);
+        }
     }
 }

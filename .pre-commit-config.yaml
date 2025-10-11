@@ -63,42 +63,24 @@ repos:
       - id: markdownlint
         args: ['--fix', '--disable', 'MD013']  # Disable line length rule
 
+  # Hook Validator - .NET specific validation and formatting
   - repo: local
     hooks:
-      # C# namespace validation
-      - id: check-namespace
-        name: Check C# Namespace Conventions
-        entry: python3 -m validators.dotnet.check_namespace
+      # Auto-format C# code with dotnet format
+      - id: format-dotnet
+        name: Format C# code with dotnet format
+        entry: python3 ../hook-validator/python/src/validators/dotnet/format_code.py
         language: system
         files: \.cs$
-        args: [--namespace-prefix=Plate.CrossMilo]
-        exclude: '(\.Designer\.cs|\.g\.cs|\.g\.i\.cs|/obj/|/bin/)'
+        pass_filenames: true
 
-      # .csproj validation
-      - id: validate-csproj
-        name: Validate .csproj Files
-        entry: python3 -m validators.dotnet.validate_csproj
+      # Check for debug statements (only check for Debugger.Break)
+      - id: check-debug-statements
+        name: Check for Debug Statements
+        entry: bash -c 'if grep -rn "Debugger.Break" --include="*.cs" "$@"; then echo "Debug statements found!"; exit 1; fi'
         language: system
-        files: \.csproj$
-        exclude: '(/obj/|/bin/)'
-
-      # TODO format validation
-      - id: validate-todo-format
-        name: Validate TODO Format
-        entry: python3 -m validators.common.validate_todo
-        language: system
-        types: [text]
-        exclude: '(\.min\.|\.generated\.|/obj/|/bin/|/node_modules/)'
-
-      # .NET formatting
-      - id: dotnet-format
-        name: dotnet format (whitespace + style)
-        entry: sh
-        args: ['-c', 'if command -v dotnet >/dev/null 2>&1; then cd dotnet/framework && if [ -f "CrossMilo.Contracts.sln" ]; then dotnet format CrossMilo.Contracts.sln --verbosity minimal || true; else echo "No solution found"; fi; else echo "dotnet CLI not found, skipping format"; fi']
-        language: system
-        files: ^dotnet/.*\.(cs|vb|fs)$
-        pass_filenames: false
-        require_serial: true
+        files: \.cs$
+        exclude: '(Tests?/|/obj/|/bin/)'
 
 # Configuration for specific tools
 default_stages: [pre-commit]

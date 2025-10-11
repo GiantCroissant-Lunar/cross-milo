@@ -18,7 +18,9 @@ public class ProxyServiceGenerator : ISourceGenerator
     public void Execute(GeneratorExecutionContext context)
     {
         if (context.SyntaxReceiver is not ProxyServiceSyntaxReceiver receiver)
+        {
             return;
+        }
 
         foreach (var candidateClass in receiver.CandidateClasses)
         {
@@ -26,22 +28,30 @@ public class ProxyServiceGenerator : ISourceGenerator
             var classSymbol = model.GetDeclaredSymbol(candidateClass);
 
             if (classSymbol == null)
+            {
                 continue;
+            }
 
             // Find RealizeService attribute
             var realizeServiceAttr = classSymbol.GetAttributes()
                 .FirstOrDefault(a => a.AttributeClass?.Name == "RealizeServiceAttribute");
 
             if (realizeServiceAttr == null)
+            {
                 continue;
+            }
 
             // Get the service type from the attribute
             if (realizeServiceAttr.ConstructorArguments.Length == 0)
+            {
                 continue;
+            }
 
             var serviceType = realizeServiceAttr.ConstructorArguments[0].Value as INamedTypeSymbol;
             if (serviceType == null)
+            {
                 continue;
+            }
 
             // Find SelectionStrategy attribute
             var selectionStrategyAttr = classSymbol.GetAttributes()
@@ -149,18 +159,31 @@ public class ProxyServiceGenerator : ISourceGenerator
         {
             var constraintClauses = new List<string>();
             if (typeParam.HasReferenceTypeConstraint)
+            {
                 constraintClauses.Add("class");
+            }
+
             if (typeParam.HasValueTypeConstraint)
+            {
                 constraintClauses.Add("struct");
+            }
+
             if (typeParam.HasConstructorConstraint)
+            {
                 constraintClauses.Add("new()");
+            }
+
             foreach (var constraintType in typeParam.ConstraintTypes)
+            {
                 constraintClauses.Add(constraintType.ToDisplayString(new SymbolDisplayFormat(
                     typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
                 )));
+            }
 
             if (constraintClauses.Any())
+            {
                 constraints.Add($"where {typeParam.Name} : {string.Join(", ", constraintClauses)}");
+            }
         }
 
         var constraintString = constraints.Any() ? "\n            " + string.Join("\n            ", constraints) : "";
@@ -261,13 +284,22 @@ public class ProxyServiceGenerator : ISourceGenerator
         {
             // Check if this is a nullable type or reference type
             if (type.IsReferenceType || type.NullableAnnotation == NullableAnnotation.Annotated)
+            {
                 return "null";
+            }
+
             return "default";
         }
         if (value is string s)
+        {
             return $"\"{s}\"";
+        }
+
         if (value is bool b)
+        {
             return b ? "true" : "false";
+        }
+
         return value.ToString() ?? "default";
     }
 }
