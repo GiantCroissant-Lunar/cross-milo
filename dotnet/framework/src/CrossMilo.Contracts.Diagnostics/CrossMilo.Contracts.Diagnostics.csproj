@@ -7,4 +7,9 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <!-- PolySharp provides polyfills for C# 9+ features like records in netstandard2.1 -->
+    <PackageReference Include="PolySharp" PrivateAssets="all" />
+  </ItemGroup>
+
 </Project>
