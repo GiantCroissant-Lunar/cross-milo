@@ -27,9 +27,9 @@ public enum SceneLayer
 public readonly struct LayeredSnapshot
 {
     public SceneLayer Layer { get; init; }
-    public IReadOnlyList<Plate.CrossMilo.Contracts.Game.EntitySnapshot> Entities { get; init; }
+    public IReadOnlyList<EntitySnapshot> Entities { get; init; }
 
-    public LayeredSnapshot(SceneLayer layer, IReadOnlyList<Plate.CrossMilo.Contracts.Game.EntitySnapshot> entities)
+    public LayeredSnapshot(SceneLayer layer, IReadOnlyList<EntitySnapshot> entities)
     {
         Layer = layer;
         Entities = entities;

@@ -20,7 +20,6 @@
     "dotnet/framework/src/CrossMilo.Contracts.Resource/CrossMilo.Contracts.Resource.csproj",
     "dotnet/framework/src/CrossMilo.Contracts.Scene/CrossMilo.Contracts.Scene.csproj",
     "dotnet/framework/src/CrossMilo.Contracts.Terminal/CrossMilo.Contracts.Terminal.csproj",
-    "dotnet/framework/src/CrossMilo.Contracts.TerminalUI/CrossMilo.Contracts.TerminalUI.csproj",
     "dotnet/framework/src/CrossMilo.Contracts.UI/CrossMilo.Contracts.UI.csproj",
     "dotnet/framework/src/CrossMilo.Contracts.WebSocket/CrossMilo.Contracts.WebSocket.csproj"
   ],
@@ -32,15 +31,28 @@
   },
 
   "pack": {
-    "enable": true,
+    "enable": false,
     "versioning": "GitVersion"
   },
-
   "publish": {
     "artifacts": []
   },
-
   "report": {
     "coverage": false
+  },
+  "metrics": {
+    "enabled": true,
+    "exclude": [
+      "obj",
+      "bin",
+      ".git",
+      ".vs",
+      ".idea",
+      "packages"
+    ],
+    "thresholds": {
+      "maxAverageComplexity": 50,
+      "minCommentPercentage": 10
+    }
   }
 }

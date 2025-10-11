@@ -1,4 +1,5 @@
-using Plate.CrossMilo.Contracts.Game;
+// TEMPORARY: GameInputEvent moved to CrossMilo.Contracts.Input as compatibility shim
+// TODO: Refactor Input services to not depend on game-specific types
 
 namespace Plate.CrossMilo.Contracts.Input.Scope;
 

@@ -1,6 +1,8 @@
 using System;
-using Plate.CrossMilo.Contracts.Game;
 using Plate.CrossMilo.Contracts.Input.Scope;
+
+// TEMPORARY: GameInputEvent moved to CrossMilo.Contracts.Input as compatibility shim
+// TODO: Refactor Input services to not depend on game-specific types
 
 // Type alias for IInputScope
 using IInputScope = Plate.CrossMilo.Contracts.Input.Scope.IService;

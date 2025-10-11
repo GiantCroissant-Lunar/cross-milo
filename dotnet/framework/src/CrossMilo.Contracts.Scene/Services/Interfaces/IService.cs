@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Plate.CrossMilo.Contracts.Game;
+
+// TEMPORARY: EntitySnapshot moved to CrossMilo.Contracts.Scene as compatibility shim
+// TODO: Refactor Scene services to not depend on game-specific types
 
 namespace Plate.CrossMilo.Contracts.Scene.Services;
 
