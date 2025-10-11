@@ -19,7 +19,7 @@ namespace Plate.CrossMilo.Contracts.Terminal;
 public class LegacyTerminalAppAdapter : IHostedService
 {
     private readonly IServiceProvider _serviceProvider;
-    private Plate.CrossMilo.Contracts.TerminalUI.ITerminalApp? _terminalApp;
+    private ITerminalApp? _terminalApp;
 
     public LegacyTerminalAppAdapter(IServiceProvider serviceProvider)
     {
@@ -30,7 +30,7 @@ public class LegacyTerminalAppAdapter : IHostedService
     {
         // Resolve ITerminalApp NOW (after PluginLoaderHostedService.StartAsync completed)
         // This timing is critical: plugins must be loaded before we can resolve ITerminalApp
-        _terminalApp = _serviceProvider.GetRequiredService<Plate.CrossMilo.Contracts.TerminalUI.ITerminalApp>();
+        _terminalApp = _serviceProvider.GetRequiredService<ITerminalApp>();
 
         // ITerminalApp extends IHostedService per RFC-0029
         // Configuration is already injected via SetRegistry

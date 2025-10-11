@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../CrossMilo.Contracts.TerminalUI/CrossMilo.Contracts.TerminalUI.csproj" />
+    <ProjectReference Include="../CrossMilo.Contracts.UI/CrossMilo.Contracts.UI.csproj" />
   </ItemGroup>
 
 </Project>

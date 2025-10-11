@@ -1,7 +1,11 @@
-namespace Plate.CrossMilo.Contracts.TerminalUI;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Plate.CrossMilo.Contracts.Terminal;
 
 /// <summary>
-/// Terminal-specific UI application.
+/// Terminal-specific UI application contract.
 /// Extends IUIApp with terminal-specific capabilities (ANSI, PTY, etc.).
 /// </summary>
 public interface ITerminalApp : Plate.CrossMilo.Contracts.UI.App.IService
@@ -14,16 +18,6 @@ public interface ITerminalApp : Plate.CrossMilo.Contracts.UI.App.IService
     // Terminal-specific events
     event EventHandler<TerminalOutputEventArgs>? OutputReceived;
     event EventHandler<TerminalExitEventArgs>? Exited;
-}
-
-// Configuration (from RFC-0029, now under TerminalUI namespace)
-public class TerminalAppConfig
-{
-    public string Name { get; set; } = string.Empty;
-    public int Cols { get; set; } = 80;
-    public int Rows { get; set; } = 24;
-    public string? WorkingDirectory { get; set; }
-    public Dictionary<string, string> Environment { get; set; } = new();
 }
 
 /// <summary>
