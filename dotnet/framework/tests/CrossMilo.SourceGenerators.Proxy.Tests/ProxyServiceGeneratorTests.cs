@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Immutable;
 using Xunit;
+using Plate.CrossMilo.SourceGenerators.Proxy;
 
 namespace Plate.CrossMilo.Proxy.Tests;
 

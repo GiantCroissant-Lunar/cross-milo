@@ -77,7 +77,9 @@ public class ProxyServiceGenerator : ISourceGenerator
 
             // Generate the proxy implementation
             var source = GenerateProxyImplementation(classSymbol, serviceType, selectionMode);
-            context.AddSource($"{classSymbol.Name}.g.cs", source);
+            // Use fully qualified name to ensure uniqueness across namespaces
+            var hintName = $"{classSymbol.ContainingNamespace.ToDisplayString().Replace(".", "_")}_{classSymbol.Name}.g.cs";
+            context.AddSource(hintName, source);
         }
     }
 
@@ -102,8 +104,9 @@ public class ProxyServiceGenerator : ISourceGenerator
         sb.AppendLine("    {");
 
         // Generate method implementations
-        var members = serviceType.GetMembers();
-        foreach (var member in members)
+        // Get all members including inherited interface members
+        var allMembers = GetAllInterfaceMembers(serviceType);
+        foreach (var member in allMembers)
         {
             if (member is IMethodSymbol method && method.MethodKind == MethodKind.Ordinary)
             {
@@ -123,6 +126,32 @@ public class ProxyServiceGenerator : ISourceGenerator
         sb.AppendLine("}");
 
         return sb.ToString();
+    }
+
+    private IEnumerable<ISymbol> GetAllInterfaceMembers(INamedTypeSymbol interfaceType)
+    {
+        var members = new List<ISymbol>();
+        var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+
+        void CollectMembers(INamedTypeSymbol type)
+        {
+            if (!visited.Add(type))
+            {
+                return;
+            }
+
+            // Add members from this interface
+            members.AddRange(type.GetMembers());
+
+            // Recursively collect from base interfaces
+            foreach (var baseInterface in type.Interfaces)
+            {
+                CollectMembers(baseInterface);
+            }
+        }
+
+        CollectMembers(interfaceType);
+        return members;
     }
 
     private void GenerateMethodImplementation(StringBuilder sb, IMethodSymbol method, INamedTypeSymbol serviceType, string selectionMode)
@@ -298,6 +327,15 @@ public class ProxyServiceGenerator : ISourceGenerator
         if (value is bool b)
         {
             return b ? "true" : "false";
+        }
+
+        // Handle enum types
+        if (type.TypeKind == TypeKind.Enum)
+        {
+            var enumType = type.ToDisplayString(new SymbolDisplayFormat(
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+            ));
+            return $"({enumType}){value}";
         }
 
         return value.ToString() ?? "default";

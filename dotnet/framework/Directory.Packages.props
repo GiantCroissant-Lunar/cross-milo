@@ -34,6 +34,7 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.10.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.10.0" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
+    <PackageVersion Include="System.Collections.Immutable" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="Terminal and UI">
@@ -42,7 +43,6 @@
   </ItemGroup>
 
   <ItemGroup Label="Networking">
-    <PackageVersion Include="SuperSocket.WebSocket.Server" Version="2.0.0-beta.15" />
   </ItemGroup>
 
   <ItemGroup Label="Media (Conditional)">

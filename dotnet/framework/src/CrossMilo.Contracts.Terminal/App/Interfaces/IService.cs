@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Hosting;
 
-namespace WingedBean.Contracts.Terminal;
+namespace Plate.CrossMilo.Contracts.Terminal.App;
 
 /// <summary>
 /// Terminal application that integrates with .NET Generic Host.

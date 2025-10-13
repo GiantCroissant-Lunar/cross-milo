@@ -1,0 +1,6 @@
+{"t":0,"type":"meta","stream":null,"seq":null,"version":"1.0","recording":{"id":"poc-demo","started":"2025-10-13T07:22:27.039842+00:00","generator":"URF POC v1.0","platform":"console","environment":{},"application":{"name":"URF Proof of Concept","version":"1.0.0","commit":null},"terminal":{"width":80,"height":24,"colorDepth":256,"encoding":"utf-8"},"streams":["terminal","state","metric"]}}
+{"t":0.1,"type":"output","stream":"terminal","seq":null,"data":{"format":"ansi","bytes":null,"text":"Hello, URF!\n"}}
+{"t":0.2,"type":"output","stream":"terminal","seq":null,"data":{"format":"ansi","bytes":null,"text":"Recording gameplay events...\n"}}
+{"t":0.3,"type":"state","stream":"gameplay","seq":null,"data":{"player":{"hp":100,"level":1,"x":10,"y":5},"floor":1}}
+{"t":0.4,"type":"output","stream":"cells","seq":null,"data":{"format":"grid","width":80,"height":24,"cells":[{"x":10,"y":5,"ch":"@","fg":"yellow","bg":null},{"x":11,"y":5,"ch":".","fg":"white","bg":null}]}}
+{"t":0.5,"type":"input","stream":"keyboard","seq":null,"data":{"key":"ArrowUp","code":null,"modifiers":[],"pressed":true}}
