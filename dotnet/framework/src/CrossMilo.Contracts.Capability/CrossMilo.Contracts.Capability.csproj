@@ -6,6 +6,7 @@
     <RootNamespace>Plate.CrossMilo.Contracts.Capability</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../../../../plugin-manoi/dotnet/framework/src/PluginManoi.Contracts/PluginManoi.Contracts.csproj" />
+    <!-- from cross-milo/.../CrossMilo.Contracts.Capability to plate-projects root: go up 5 levels -->
+    <ProjectReference Include="../../../../../plugin-manoi/dotnet/framework/src/PluginManoi.Contracts/PluginManoi.Contracts.csproj" />
   </ItemGroup>
 </Project>

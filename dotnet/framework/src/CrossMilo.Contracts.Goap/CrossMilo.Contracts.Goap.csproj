@@ -6,8 +6,12 @@
     <RootNamespace>Plate.CrossMilo.Contracts.Goap</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../../../../plugin-manoi/dotnet/framework/src/PluginManoi.Contracts/PluginManoi.Contracts.csproj" />
-    <ProjectReference Include="../../../../goap-ckpor/dotnet/framework/src/Plate.Goap.Core/Plate.Goap.Core.csproj" />
-    <ProjectReference Include="../../../../goap-ckpor/dotnet/framework/src/Plate.Goap.Resolver/Plate.Goap.Resolver.csproj" />
+    <!-- from cross-milo/.../CrossMilo.Contracts.Goap to plate-projects root: go up 5 levels -->
+    <ProjectReference Include="../../../../../plugin-manoi/dotnet/framework/src/PluginManoi.Contracts/PluginManoi.Contracts.csproj" />
+    <ProjectReference Include="../../../../../goap-ckpor/dotnet/framework/src/Plate.Goap.Core/Plate.Goap.Core.csproj" />
+    <ProjectReference Include="../../../../../goap-ckpor/dotnet/framework/src/Plate.Goap.Resolver/Plate.Goap.Resolver.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>
 </Project>
