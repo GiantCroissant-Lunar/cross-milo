@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Plate.CrossMilo.Contracts.Goap</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../../plugin-manoi/dotnet/framework/src/PluginManoi.Contracts/PluginManoi.Contracts.csproj" />
+    <ProjectReference Include="../../../../goap-ckpor/dotnet/framework/src/Plate.Goap.Core/Plate.Goap.Core.csproj" />
+    <ProjectReference Include="../../../../goap-ckpor/dotnet/framework/src/Plate.Goap.Resolver/Plate.Goap.Resolver.csproj" />
+  </ItemGroup>
+</Project>
