@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Plate.CrossMilo.Contracts.Recorder.Video;
 
 /// <summary>
@@ -14,7 +17,7 @@ public class RecordingSyncMetadata
     /// <summary>
     /// Unique session identifier.
     /// </summary>
-    public required string SessionId { get; set; }
+    public string SessionId { get; set; } = string.Empty;
 
     /// <summary>
     /// Recording start time (UTC).
@@ -29,7 +32,7 @@ public class RecordingSyncMetadata
     /// <summary>
     /// URF file name (relative to sync file).
     /// </summary>
-    public required string URFFile { get; set; }
+    public string URFFile { get; set; } = string.Empty;
 
     /// <summary>
     /// Video frame rate (if video recording is enabled).

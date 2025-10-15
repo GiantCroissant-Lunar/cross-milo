@@ -102,8 +102,8 @@ public class VideoExportProgress
     /// <summary>
     /// Percentage complete (0-100).
     /// </summary>
-    public double PercentComplete => TotalFrames > 0 
-        ? (double)CurrentFrame / TotalFrames * 100.0 
+    public double PercentComplete => TotalFrames > 0
+        ? (double)CurrentFrame / TotalFrames * 100.0
         : 0.0;
 
     /// <summary>
