@@ -80,7 +80,7 @@ CrossMilo/
 
 ## Rule System
 
-**Master Source**: `../rule-ground/`  
+**Master Source**: `/Users/apprenticegc/Work/lunar-horse/personal-work/plate-projects/rule-ground/`  
 **Workspace Rules**: `.agent/local/workspace-reference.md`  
 **Cached Base/Stack**: `~/.cache/lunar-rules/v1.0.0/`
 

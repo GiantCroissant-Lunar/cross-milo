@@ -10,7 +10,7 @@
 
 ### Rule Priority (Read in Order)
 
-1. **Workspace Rules** (highest priority) → `/Users/apprenticegc/Work/lunar-horse/.agent/local/overrides.md`
+1. **Workspace Rules** (highest priority) → `.agent/local/workspace-reference.md`
 2. **Project Rules** → `.agent/local/overrides.md` 
 3. **Stack Rules** (cached) → `~/.cache/lunar-rules/v1.0.0/stacks/{stack}/`
 4. **Base Rules** (cached) → `~/.cache/lunar-rules/v1.0.0/base/`
@@ -19,8 +19,8 @@
 
 ```
 Workspace Rules (ALL projects)
-  Absolute: /Users/apprenticegc/Work/lunar-horse/.agent/local/overrides.md
-  Relative: ../../../.agent/local/overrides.md
+  Reference: .agent/local/workspace-reference.md
+  Reference: .agent/local/workspace-reference.md
   
 Project Rules (this project only)
   Location: .agent/local/overrides.md
@@ -67,7 +67,7 @@ These apply to ALL projects in lunar-horse workspace:
 - Then read workspace rules
 - Ask if uncertain
 
-**→ See workspace rules for complete list**: `../../../.agent/local/overrides.md`
+**→ See workspace rules for complete list**: `.agent/local/workspace-reference.md`
 
 ---
 
@@ -83,7 +83,7 @@ Cross-platform abstraction contracts. Contract assemblies per domain.
 
 **Do this:**
 
-1. ✅ Read workspace rules: `../../../.agent/local/overrides.md`
+1. ✅ Read workspace rules: `.agent/local/workspace-reference.md`
 2. ✅ Read project rules: `.agent/local/overrides.md`
 3. ✅ Check current working directory with `pwd`
 4. ✅ Check project structure with `ls -la`
